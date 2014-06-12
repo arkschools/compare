@@ -1,5 +1,8 @@
 {
 	"autoload": {
         "psr-4": {"Ark\\Compare\\": "src/"}
-	}
+	},
+    "require": {
+        "symfony/yaml": "2.5.*"
+    }
 }

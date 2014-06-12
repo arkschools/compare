@@ -54,7 +54,7 @@ abstract class CommandLineApplication {
 	protected function padL($str, $len=100){ return str_pad($str, $len, ' ', STR_PAD_LEFT); }
 	protected function padR($str, $len=100){ return str_pad($str, $len, ' ', STR_PAD_RIGHT); }
 
-	protected function switchColor($xColSelection = 'reset') {
+	public function switchColor($xColSelection = 'reset') {
 		$cliApp = $this;
 		$encoded = array_map(function($strCode) use ($cliApp) {
 			return (isset($cliApp->colors[$strCode])) ? $cliApp->colors[$strCode] :  null;
@@ -62,7 +62,11 @@ abstract class CommandLineApplication {
 		return sprintf( "\033[%sm", implode( ';', $encoded) );
 	}
 
-	protected function out($message, $color = "reset") {
+    public function error($message) {
+        $this->out($message, array('bold', 'red'));
+    }
+
+	public function out($message, $color = "reset") {
 		if(is_array($message)) {
 			$colorizedMssg = "";
 			foreach($message as $mssg => $xcol) {
